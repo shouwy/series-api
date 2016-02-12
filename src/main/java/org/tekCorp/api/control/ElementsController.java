@@ -19,7 +19,7 @@ public class ElementsController {
     @Autowired ElementRepository elementRepository;
 
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public JsonResponse view(@PathVariable String id){
+    public @ResponseBody JsonResponse view(@PathVariable String id){
         Element element = elementRepository.findOne(id);
         JsonResponse jsonResponse = new JsonResponse(200, "Find Element", element);
 
@@ -43,7 +43,7 @@ public class ElementsController {
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public JsonResponse list(){
+    public @ResponseBody JsonResponse list(){
         List<Element> elementList = elementRepository.findAll();
         if (elementList == null) {
             return new JsonResponse(203, "Element List Empty");
@@ -52,7 +52,7 @@ public class ElementsController {
     }
 
     @RequestMapping(value = "/list/type/{idType}", method = RequestMethod.POST)
-    public JsonResponse listByType(@PathVariable String idType){
+    public @ResponseBody JsonResponse listByType(@PathVariable String idType){
         List<Element> elementList = elementRepository.findByType(idType);
         if (elementList == null) {
             return new JsonResponse(203, "Element List Empty");
@@ -61,7 +61,7 @@ public class ElementsController {
     }
 
     @RequestMapping(value = "/list/etat/{idEtat}", method = RequestMethod.POST)
-    public JsonResponse listByEtat(@PathVariable String idEtat){
+    public @ResponseBody JsonResponse listByEtat(@PathVariable String idEtat){
         List<Element> elementList = elementRepository.findByEtat(idEtat);
         if (elementList == null) {
             return new JsonResponse(203, "Element List Empty");
@@ -70,7 +70,7 @@ public class ElementsController {
     }
 
     @RequestMapping(value = "/list/etatPersonnal/{idEtat}", method = RequestMethod.POST)
-    public JsonResponse listByEtatPersonnal(@PathVariable String idEtat){
+    public @ResponseBody JsonResponse listByEtatPersonnal(@PathVariable String idEtat){
         List<Element> elementList = elementRepository.findByEtatPersonal(idEtat);
         if (elementList == null) {
             return new JsonResponse(203, "Element List Empty");

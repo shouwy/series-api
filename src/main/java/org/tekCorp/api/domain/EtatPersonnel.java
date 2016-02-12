@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document
 @CompoundIndexes({
-        @CompoundIndex(name = "etatpersonal_idx", def = "{'nom' : 1, 'idType' : 1}")
+        @CompoundIndex(name = "etatpersonal_idx", def = "{'nom' : 1, 'idType' : 1}", unique = true)
 })
 public class EtatPersonnel {
     @Id

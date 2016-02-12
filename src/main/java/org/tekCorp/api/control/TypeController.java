@@ -19,13 +19,13 @@ public class TypeController {
     @Autowired TypeRepository typeRepository;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public JsonResponse list(){
+    public @ResponseBody JsonResponse list(){
         List<Type> typeList = typeRepository.findAll();
         return new JsonResponse(200, "Type List", typeList);
     }
 
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public JsonResponse view(@PathVariable String id){
+    public @ResponseBody JsonResponse view(@PathVariable String id){
         Type type = typeRepository.findOne(id);
         JsonResponse jsonResponse = new JsonResponse(200, "Find Type", type);
 

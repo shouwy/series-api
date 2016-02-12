@@ -9,5 +9,5 @@ import org.tekCorp.api.domain.EtatPersonnel;
  */
 @Repository
 public interface EtatPersonnelRepository extends MongoRepository<EtatPersonnel, String> {
-    EtatPersonnel findByNom(String nom);
+    EtatPersonnel findByNomAndIdType(String nom, String idType);
 }

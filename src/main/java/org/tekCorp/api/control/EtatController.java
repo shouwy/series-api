@@ -19,13 +19,13 @@ public class EtatController {
     @Autowired EtatRepository etatRepository;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public JsonResponse list(){
+    public @ResponseBody JsonResponse list(){
         List<Etat> etatList = etatRepository.findAll();
         return new JsonResponse(200, "Etat List", etatList);
     }
 
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public JsonResponse view(@PathVariable String id){
+    public @ResponseBody JsonResponse view(@PathVariable String id){
         Etat etat = etatRepository.findOne(id);
         JsonResponse jsonResponse = new JsonResponse(200, "Find Etat", etat);
 

@@ -13,19 +13,19 @@ import java.util.List;
  * Created by FRERES Thierry on 10/02/2016.
  */
 @Controller
-@RequestMapping("/etatPersonnal")
+@RequestMapping("/etatPersonal")
 public class EtatPersonnalController {
 
     @Autowired EtatPersonnelRepository etatPersonnelRepository;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public JsonResponse list(){
+    public @ResponseBody JsonResponse list(){
         List<EtatPersonnel> etatList = etatPersonnelRepository.findAll();
         return new JsonResponse(200, "Etat List", etatList);
     }
 
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public JsonResponse view(@PathVariable String id){
+    public @ResponseBody JsonResponse view(@PathVariable String id){
         EtatPersonnel etatPersonnel = etatPersonnelRepository.findOne(id);
         JsonResponse jsonResponse = new JsonResponse(200, "Find EtatPersonnal", etatPersonnel);
 
@@ -38,7 +38,7 @@ public class EtatPersonnalController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public @ResponseBody JsonResponse add(@RequestBody EtatPersonnel etatPersonnel){
-        EtatPersonnel oriEtatPersonnal = etatPersonnelRepository.findByNom(etatPersonnel.getNom());
+        EtatPersonnel oriEtatPersonnal = etatPersonnelRepository.findByNomAndIdType(etatPersonnel.getNom(), etatPersonnel.getIdType());
         if (oriEtatPersonnal != null) {
             return new JsonResponse(203, "EtatPersonnal Allresdy Exists");
         }

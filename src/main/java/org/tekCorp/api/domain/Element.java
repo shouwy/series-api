@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Document
 @CompoundIndexes({
-        @CompoundIndex(name = "element_idx", def = "{'nom' : 1, 'year' : 1}")
+        @CompoundIndex(name = "element_idx", def = "{'nom' : 1, 'year' : 1}", unique = true)
 })
 public class Element {
     @Id
