@@ -11,6 +11,8 @@ import java.util.List;
  */
 @Repository
 public interface ElementRepository extends MongoRepository<Element, String> {
-    List<Element> findByType(Integer idType);
+    List<Element> findByType(String idType);
     Element findByNomAndYear(String nom, Integer year);
+    List<Element> findByEtat(String idEtat);
+    List<Element> findByEtatpPersonnal(String idEtat);
 }
