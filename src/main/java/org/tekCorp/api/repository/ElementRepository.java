@@ -14,5 +14,5 @@ public interface ElementRepository extends MongoRepository<Element, String> {
     List<Element> findByType(String idType);
     Element findByNomAndYear(String nom, Integer year);
     List<Element> findByEtat(String idEtat);
-    List<Element> findByEtatpPersonnal(String idEtat);
+    List<Element> findByEtatpPersonal(String idEtat);
 }

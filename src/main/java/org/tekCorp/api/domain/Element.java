@@ -22,7 +22,7 @@ public class Element {
     private String synopsis;
     private String type;
     private String etat;
-    private String etatPersonnel;
+    private String etatPersonal;
     private List<Saison> saisons;
     private String image;
 
@@ -82,12 +82,12 @@ public class Element {
         this.saisons = saisons;
     }
 
-    public String getEtatPersonnel() {
-        return etatPersonnel;
+    public String getEtatPersonal() {
+        return etatPersonal;
     }
 
-    public void setEtatPersonnel(String etatPersonnel) {
-        this.etatPersonnel = etatPersonnel;
+    public void setEtatPersonal(String etatPersonnel) {
+        this.etatPersonal = etatPersonnel;
     }
 
     public Integer getYear() {

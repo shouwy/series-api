@@ -71,7 +71,7 @@ public class ElementsController {
 
     @RequestMapping(value = "/list/etatPersonnal/{idEtat}", method = RequestMethod.POST)
     public JsonResponse listByEtatPersonnal(@PathVariable String idEtat){
-        List<Element> elementList = elementRepository.findByEtatpPersonnal(idEtat);
+        List<Element> elementList = elementRepository.findByEtatpPersonal(idEtat);
         if (elementList == null) {
             return new JsonResponse(203, "Element List Empty");
         }
