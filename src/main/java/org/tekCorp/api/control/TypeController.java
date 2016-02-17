@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.tekCorp.api.domain.Type;
 import org.tekCorp.api.repository.TypeRepository;
-import org.tekCorp.api.response.JsonResponse;
 
 import java.util.List;
 
@@ -19,31 +18,25 @@ public class TypeController {
     @Autowired TypeRepository typeRepository;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public @ResponseBody JsonResponse list(){
+    public @ResponseBody List<Type> list(){
         List<Type> typeList = typeRepository.findAll();
-        return new JsonResponse(200, "Type List", typeList);
+        return typeList;
     }
 
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public @ResponseBody JsonResponse view(@PathVariable String id){
+    public @ResponseBody Type view(@PathVariable String id){
         Type type = typeRepository.findOne(id);
-        JsonResponse jsonResponse = new JsonResponse(200, "Find Type", type);
-
-        if (type == null){
-            jsonResponse = new JsonResponse(203, "Type Not Found");
-        }
-
-        return jsonResponse;
+        return type;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public @ResponseBody JsonResponse add(@RequestBody Type type){
+    public @ResponseBody Type add(@RequestBody Type type){
         Type oriType = typeRepository.findByNom(type.getNom());
         if (oriType != null) {
-            return new JsonResponse(203, "Type Allready Exists");
+            return oriType;
         }
         type = typeRepository.save(type);
 
-        return new JsonResponse(200, "Insert OK", type);
+        return type;
     }
 }

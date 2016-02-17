@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.tekCorp.api.domain.EtatPersonnel;
 import org.tekCorp.api.repository.EtatPersonnelRepository;
-import org.tekCorp.api.response.JsonResponse;
 
 import java.util.List;
 
@@ -19,32 +18,26 @@ public class EtatPersonnalController {
     @Autowired EtatPersonnelRepository etatPersonnelRepository;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public @ResponseBody JsonResponse list(){
+    public @ResponseBody List<EtatPersonnel> list(){
         List<EtatPersonnel> etatList = etatPersonnelRepository.findAll();
-        return new JsonResponse(200, "Etat List", etatList);
+        return etatList;
     }
 
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public @ResponseBody JsonResponse view(@PathVariable String id){
+    public @ResponseBody EtatPersonnel view(@PathVariable String id){
         EtatPersonnel etatPersonnel = etatPersonnelRepository.findOne(id);
-        JsonResponse jsonResponse = new JsonResponse(200, "Find EtatPersonnal", etatPersonnel);
-
-        if (etatPersonnel == null) {
-            jsonResponse = new JsonResponse(203, "EtatPersonnal Not Found");
-        }
-
-        return jsonResponse;
+        return etatPersonnel;
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public @ResponseBody JsonResponse add(@RequestBody EtatPersonnel etatPersonnel){
+    public @ResponseBody EtatPersonnel add(@RequestBody EtatPersonnel etatPersonnel){
         EtatPersonnel oriEtatPersonnal = etatPersonnelRepository.findByNomAndIdType(etatPersonnel.getNom(), etatPersonnel.getIdType());
         if (oriEtatPersonnal != null) {
-            return new JsonResponse(203, "EtatPersonnal Allresdy Exists");
+            return oriEtatPersonnal;
         }
 
         etatPersonnel = etatPersonnelRepository.save(etatPersonnel);
 
-        return new JsonResponse(200, "Insert OK", etatPersonnel);
+        return etatPersonnel;
     }
 }
