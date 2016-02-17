@@ -9,7 +9,6 @@ import org.tekCorp.api.domain.Element;
 import org.tekCorp.api.domain.Type;
 import org.tekCorp.api.repository.ElementRepository;
 import org.tekCorp.api.repository.TypeRepository;
-import org.tekCorp.api.response.JsonResponse;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,12 +23,12 @@ public class HomeController {
     @Autowired TypeRepository typeRepository;
     @Autowired ElementRepository elementRepository;
 
-    @RequestMapping("/")
-    public @ResponseBody JsonResponse home(){
+    @RequestMapping("/home")
+    public @ResponseBody List<Element> home(){
         List<Type> typeList = typeRepository.findAll();
         List<Element> elementList = elementRepository.findAll();
         List<Element> typeElementHashMap = getRandElement(typeList, elementList);
-        return new JsonResponse(200, "", typeElementHashMap);
+        return typeElementHashMap;
     }
 
     private List<Element> getRandElement(List<Type> typeList, List<Element> elementList) {
