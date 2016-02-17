@@ -1,0 +1,16 @@
+{
+  "name": "series-api",
+  "scripts": {
+  },
+  "env": {
+  },
+  "addons": [
+    "mongolab",
+    "papertrail"
+  ],
+  "buildpacks": [
+    {
+      "url": "urn:buildpack:heroku/java"
+    }
+  ]
+}
