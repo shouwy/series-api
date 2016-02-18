@@ -23,6 +23,12 @@ public class EtatPersonnalController {
         return etatList;
     }
 
+    @RequestMapping(value = "/list/{idType}", method = RequestMethod.GET)
+    public @ResponseBody List<EtatPersonnel> listByType(@PathVariable String idType){
+        List<EtatPersonnel> etatList = etatPersonnelRepository.findByIdType(idType);
+        return etatList;
+    }
+
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public @ResponseBody EtatPersonnel view(@PathVariable String id){
         EtatPersonnel etatPersonnel = etatPersonnelRepository.findOne(id);
