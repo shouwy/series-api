@@ -9,34 +9,33 @@ import org.tekCorp.api.repository.EtatRepository;
 import java.util.List;
 
 /**
- * Created by FRERES Thierry on 10/02/2016.
+ * Created by FRERES Thierry on 22/02/2016.
  */
 @Controller
 @RequestMapping("/etat")
 public class EtatController {
+        @Autowired EtatRepository etatRepository;
 
-    @Autowired EtatRepository etatRepository;
-
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public @ResponseBody List<Etat> list(){
-        List<Etat> etatList = etatRepository.findAll();
-        return etatList;
-    }
-
-    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public @ResponseBody Etat view(@PathVariable String id){
-        Etat etat = etatRepository.findOne(id);
-        return etat;
-    }
-
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public @ResponseBody Etat add(@RequestBody Etat etat){
-        Etat oriEtat = etatRepository.findByName(etat.getName());
-        if (oriEtat != null) {
-            return oriEtat;
+        @RequestMapping(value = "/list", method = RequestMethod.GET)
+        public @ResponseBody List<Etat> list(){
+            List<Etat> etatList = etatRepository.findAll();
+            return etatList;
         }
-        etat = etatRepository.save(etat);
 
-        return etat;
-    }
+        @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+        public @ResponseBody Etat view(@PathVariable String id){
+            Etat etat = etatRepository.findOne(id);
+            return etat;
+        }
+
+        @RequestMapping(value = "/add", method = RequestMethod.POST)
+        public @ResponseBody Etat add(@RequestBody Etat etat){
+            Etat orietat = etatRepository.findByEtatName(etat.getEtatName());
+            if (orietat != null) {
+                return orietat;
+            }
+            etat = etatRepository.save(etat);
+
+            return etat;
+        }
 }

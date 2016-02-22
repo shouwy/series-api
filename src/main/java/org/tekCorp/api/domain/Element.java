@@ -12,17 +12,16 @@ import java.util.List;
  */
 @Document
 @CompoundIndexes({
-        @CompoundIndex(name = "element_idx", def = "{'nom' : 1, 'year' : 1}", unique = true)
+        @CompoundIndex(name = "element_idx", def = "{'title' : 1, 'year' : 1}", unique = true)
 })
 public class Element {
     @Id
     private String id;
-    private String name;
+    private String title;
     private Integer year;
     private String synopsis;
     private Type type;
     private Etat etat;
-    private EtatPersonnel etatPersonal;
     private List<Saison> saisons;
     private String image;
 
@@ -42,64 +41,46 @@ public class Element {
         this.id = Id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String nom) {
-        this.name = nom;
+    public void setTitle(String title) {
+        this.title = title;
     }
-
     public String getSynopsis() {
         return synopsis;
     }
-
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
     }
-
     public List<Saison> getSaisons() {
         return saisons;
     }
-
     public void setSaisons(List<Saison> saisons) {
         this.saisons = saisons;
     }
-
     public Integer getYear() {
         return year;
     }
-
     public void setYear(Integer year) {
         this.year = year;
     }
-
     public Type getType() {
         return type;
     }
-
     public void setType(Type type) {
         this.type = type;
     }
-
     public Etat getEtat() {
         return etat;
     }
-
     public void setEtat(Etat etat) {
         this.etat = etat;
     }
 
-    public EtatPersonnel getEtatPersonal() {
-        return etatPersonal;
-    }
-
-    public void setEtatPersonal(EtatPersonnel etatPersonal) {
-        this.etatPersonal = etatPersonal;
-    }
-
     @Override
     public String toString(){
-        return "Id : "+this.id+" - Nom : "+this.name;
+        return "Id : "+this.id+" - Title : "+this.title;
     }
 }

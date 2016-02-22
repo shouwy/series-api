@@ -5,7 +5,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.tekCorp.api.domain.Element;
 import org.tekCorp.api.domain.Etat;
-import org.tekCorp.api.domain.EtatPersonnel;
 import org.tekCorp.api.domain.Type;
 import org.tekCorp.api.repository.ElementRepository;
 
@@ -28,7 +27,7 @@ public class ElementsController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public @ResponseBody Element add(@RequestBody Element element){
-        Element oriElement = elementRepository.findByNameAndYear(element.getName(), element.getYear());
+        Element oriElement = elementRepository.findByTitleAndYear(element.getTitle(), element.getYear());
 
         if (oriElement != null){
             return oriElement;
@@ -62,9 +61,11 @@ public class ElementsController {
         return elementList;
     }
 
+    /*
     @RequestMapping(value = "/list/etatPersonnal/", method = RequestMethod.POST)
     public @ResponseBody List<Element> listByEtatPersonnal(@RequestBody EtatPersonnel etatPersonnel){
         List<Element> elementList = elementRepository.findByEtatPersonal(etatPersonnel);
         return elementList;
     }
+    */
 }

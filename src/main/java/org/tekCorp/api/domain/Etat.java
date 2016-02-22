@@ -13,7 +13,7 @@ public class Etat {
     @Id
     private String id;
     @Indexed(unique = true)
-    private String name;
+    private String etatName;
 
     public String getId() {
         return id;
@@ -23,17 +23,17 @@ public class Etat {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getEtatName() {
+        return etatName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEtatName(String etatName) {
+        this.etatName = etatName;
     }
 
     @Override
     public String toString(){
-        return "Nom : "+this.name;
+        return "Nom : "+this.etatName;
     }
 
 }

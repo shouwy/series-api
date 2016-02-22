@@ -5,9 +5,9 @@ import org.springframework.stereotype.Repository;
 import org.tekCorp.api.domain.Etat;
 
 /**
- * Created by FRERES Thierry on 05/02/2016.
+ * Created by FRERES Thierry on 22/02/2016.
  */
 @Repository
 public interface EtatRepository extends MongoRepository<Etat, String> {
-    Etat findByName(String name);
+    Etat findByEtatName(String etatName);
 }

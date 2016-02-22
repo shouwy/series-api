@@ -9,5 +9,5 @@ import org.tekCorp.api.domain.Type;
  */
 @Repository
 public interface TypeRepository extends MongoRepository<Type, String> {
-    Type findByName(String name);
+    Type findByTypeName(String typeName);
 }

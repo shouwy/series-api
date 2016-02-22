@@ -7,17 +7,17 @@ import java.util.Calendar;
  */
 public class Episode {
 
-    private String titre;
+    private String episodeTitle;
     private String synopsis;
     private Calendar dateSortie;
     private EtatPersonnel etatPersonnel;
 
-    public String getTitre() {
-        return titre;
+    public String getEpisodeTitle() {
+        return episodeTitle;
     }
 
-    public void setTitre(String titre) {
-        this.titre = titre;
+    public void setEpisodeTitle(String episodeTitle) {
+        this.episodeTitle = episodeTitle;
     }
 
     public String getSynopsis() {

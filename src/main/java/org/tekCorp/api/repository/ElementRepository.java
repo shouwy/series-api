@@ -4,7 +4,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import org.tekCorp.api.domain.Element;
 import org.tekCorp.api.domain.Etat;
-import org.tekCorp.api.domain.EtatPersonnel;
 import org.tekCorp.api.domain.Type;
 
 import java.util.List;
@@ -15,7 +14,6 @@ import java.util.List;
 @Repository
 public interface ElementRepository extends MongoRepository<Element, String> {
     List<Element> findByType(Type type);
-    Element findByNameAndYear(String name, Integer year);
+    Element findByTitleAndYear(String title, Integer year);
     List<Element> findByEtat(Etat etat);
-    List<Element> findByEtatPersonal(EtatPersonnel etatPersonnel);
 }

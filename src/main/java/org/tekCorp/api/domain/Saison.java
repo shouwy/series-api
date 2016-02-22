@@ -7,16 +7,16 @@ import java.util.List;
  */
 public class Saison {
 
-    private String nom;
+    private String seasonName;
     private String anneeProduction;
     private List<Episode> episodes;
 
-    public String getNom() {
-        return nom;
+    public String getSeasonName() {
+        return seasonName;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setSeasonName(String seasonName) {
+        this.seasonName = seasonName;
     }
 
     public String getAnneeProduction() {
