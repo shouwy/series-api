@@ -17,7 +17,7 @@ import java.util.List;
 public class Element {
     @Id
     private String id;
-    private String nom;
+    private String name;
     private Integer year;
     private String synopsis;
     private String type;
@@ -42,12 +42,12 @@ public class Element {
         this.id = Id;
     }
 
-    public String getNom() {
-        return nom;
+    public String getName() {
+        return name;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setName(String nom) {
+        this.name = nom;
     }
 
     public String getSynopsis() {
@@ -100,6 +100,6 @@ public class Element {
 
     @Override
     public String toString(){
-        return "Id : "+this.id+" - Nom : "+this.nom;
+        return "Id : "+this.id+" - Nom : "+this.name;
     }
 }
