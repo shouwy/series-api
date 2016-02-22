@@ -20,9 +20,9 @@ public class Element {
     private String name;
     private Integer year;
     private String synopsis;
-    private String type;
-    private String etat;
-    private String etatPersonal;
+    private Type type;
+    private Etat etat;
+    private EtatPersonnel etatPersonal;
     private List<Saison> saisons;
     private String image;
 
@@ -58,22 +58,6 @@ public class Element {
         this.synopsis = synopsis;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getEtat() {
-        return etat;
-    }
-
-    public void setEtat(String etat) {
-        this.etat = etat;
-    }
-
     public List<Saison> getSaisons() {
         return saisons;
     }
@@ -82,20 +66,36 @@ public class Element {
         this.saisons = saisons;
     }
 
-    public String getEtatPersonal() {
-        return etatPersonal;
-    }
-
-    public void setEtatPersonal(String etatPersonnel) {
-        this.etatPersonal = etatPersonnel;
-    }
-
     public Integer getYear() {
         return year;
     }
 
     public void setYear(Integer year) {
         this.year = year;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
+    public void setType(Type type) {
+        this.type = type;
+    }
+
+    public Etat getEtat() {
+        return etat;
+    }
+
+    public void setEtat(Etat etat) {
+        this.etat = etat;
+    }
+
+    public EtatPersonnel getEtatPersonal() {
+        return etatPersonal;
+    }
+
+    public void setEtatPersonal(EtatPersonnel etatPersonal) {
+        this.etatPersonal = etatPersonal;
     }
 
     @Override
