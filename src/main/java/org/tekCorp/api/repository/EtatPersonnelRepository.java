@@ -3,6 +3,7 @@ package org.tekCorp.api.repository;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import org.tekCorp.api.domain.EtatPersonnel;
+import org.tekCorp.api.domain.Type;
 
 import java.util.List;
 
@@ -11,6 +12,6 @@ import java.util.List;
  */
 @Repository
 public interface EtatPersonnelRepository extends MongoRepository<EtatPersonnel, String> {
-    EtatPersonnel findByNomAndIdType(String nom, String idType);
-    List<EtatPersonnel> findByIdType(String idType);
+    EtatPersonnel findByNameAndType(String nom, Type idType);
+    List<EtatPersonnel> findByType(Type type);
 }

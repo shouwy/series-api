@@ -16,8 +16,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class EtatPersonnel {
     @Id
     private String id;
-    private String nom;
-    private String idType;
+    private String name;
+    private Type type;
 
     public String getId() {
         return id;
@@ -27,24 +27,24 @@ public class EtatPersonnel {
         this.id = id;
     }
 
-    public String getIdType() {
-        return idType;
+    public String getName() {
+        return name;
     }
 
-    public void setIdType(String idType) {
-        this.idType = idType;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getNom() {
-        return nom;
+    public Type getType() {
+        return type;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public void setType(Type type) {
+        this.type = type;
     }
 
     @Override
     public String toString(){
-        return "Nom : "+this.nom;
+        return "Nom : "+this.name;
     }
 }

@@ -31,7 +31,7 @@ public class EtatController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public @ResponseBody Etat add(@RequestBody Etat etat){
-        Etat oriEtat = etatRepository.findByNom(etat.getNom());
+        Etat oriEtat = etatRepository.findByName(etat.getName());
         if (oriEtat != null) {
             return oriEtat;
         }

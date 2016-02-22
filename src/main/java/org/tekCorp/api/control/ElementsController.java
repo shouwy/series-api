@@ -4,6 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.tekCorp.api.domain.Element;
+import org.tekCorp.api.domain.Etat;
+import org.tekCorp.api.domain.EtatPersonnel;
+import org.tekCorp.api.domain.Type;
 import org.tekCorp.api.repository.ElementRepository;
 
 import java.util.List;
@@ -47,21 +50,21 @@ public class ElementsController {
         return elementList;
     }
 
-    @RequestMapping(value = "/list/type/{idType}", method = RequestMethod.GET)
-    public @ResponseBody List<Element> listByType(@PathVariable String idType){
-        List<Element> elementList = elementRepository.findByType(idType);
+    @RequestMapping(value = "/list/type/", method = RequestMethod.POST)
+    public @ResponseBody List<Element> listByType(@RequestBody Type type){
+        List<Element> elementList = elementRepository.findByType(type);
         return elementList;
     }
 
-    @RequestMapping(value = "/list/etat/{idEtat}", method = RequestMethod.GET)
-    public @ResponseBody List<Element> listByEtat(@PathVariable String idEtat){
-        List<Element> elementList = elementRepository.findByEtat(idEtat);
+    @RequestMapping(value = "/list/etat/", method = RequestMethod.POST)
+    public @ResponseBody List<Element> listByEtat(@RequestBody Etat etat){
+        List<Element> elementList = elementRepository.findByEtat(etat);
         return elementList;
     }
 
-    @RequestMapping(value = "/list/etatPersonnal/{idEtat}", method = RequestMethod.GET)
-    public @ResponseBody List<Element> listByEtatPersonnal(@PathVariable String idEtat){
-        List<Element> elementList = elementRepository.findByEtatPersonal(idEtat);
+    @RequestMapping(value = "/list/etatPersonnal/", method = RequestMethod.POST)
+    public @ResponseBody List<Element> listByEtatPersonnal(@RequestBody EtatPersonnel etatPersonnel){
+        List<Element> elementList = elementRepository.findByEtatPersonal(etatPersonnel);
         return elementList;
     }
 }

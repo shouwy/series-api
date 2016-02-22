@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.tekCorp.api.domain.EtatPersonnel;
+import org.tekCorp.api.domain.Type;
 import org.tekCorp.api.repository.EtatPersonnelRepository;
 
 import java.util.List;
@@ -23,9 +24,9 @@ public class EtatPersonnalController {
         return etatList;
     }
 
-    @RequestMapping(value = "/list/type/{idType}", method = RequestMethod.GET)
-    public @ResponseBody List<EtatPersonnel> listByType(@PathVariable String idType){
-        List<EtatPersonnel> etatList = etatPersonnelRepository.findByIdType(idType);
+    @RequestMapping(value = "/list/type/", method = RequestMethod.GET)
+    public @ResponseBody List<EtatPersonnel> listByType(@RequestBody Type type){
+        List<EtatPersonnel> etatList = etatPersonnelRepository.findByType(type);
         return etatList;
     }
 
@@ -37,7 +38,7 @@ public class EtatPersonnalController {
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public @ResponseBody EtatPersonnel add(@RequestBody EtatPersonnel etatPersonnel){
-        EtatPersonnel oriEtatPersonnal = etatPersonnelRepository.findByNomAndIdType(etatPersonnel.getNom(), etatPersonnel.getIdType());
+        EtatPersonnel oriEtatPersonnal = etatPersonnelRepository.findByNameAndType(etatPersonnel.getName(), etatPersonnel.getType());
         if (oriEtatPersonnal != null) {
             return oriEtatPersonnal;
         }
