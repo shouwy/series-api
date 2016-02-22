@@ -13,20 +13,23 @@ public class Type {
     @Id
     private String id;
     @Indexed(unique = true)
-    private String nom;
+    private String name;
 
-    public String getNom() {
-        return nom;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public void setNom(String nom) {
-        this.nom = nom;
+    public String getName() {
+        return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @Override
     public String toString(){
-        return "Nom : "+this.nom;
+        return "Nom : "+this.name;
     }
 
     public String getId() {
