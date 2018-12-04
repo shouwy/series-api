@@ -1,12 +1,17 @@
 package org.tekCorp.api.control;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.tekCorp.api.domain.EtatPersonnel;
 import org.tekCorp.api.repository.EtatPersonnelRepository;
-
-import java.util.List;
 
 /**
  * Created by FRERES Thierry on 10/02/2016.
@@ -15,13 +20,18 @@ import java.util.List;
 @RequestMapping("/etatPersonal")
 public class EtatPersonnalController {
 
-    @Autowired EtatPersonnelRepository etatPersonnelRepository;
+    private final EtatPersonnelRepository etatPersonnelRepository;
+
+    @Autowired
+    public EtatPersonnalController(EtatPersonnelRepository etatPersonnelRepository) {
+        this.etatPersonnelRepository = etatPersonnelRepository;
+    }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public @ResponseBody List<EtatPersonnel> list(){
-        List<EtatPersonnel> etatList = etatPersonnelRepository.findAll();
-        return etatList;
+        return etatPersonnelRepository.findAll();
     }
+
     /*
     @RequestMapping(value = "/list/type/", method = RequestMethod.GET)
     public @ResponseBody List<EtatPersonnel> listByType(@RequestBody Type type){
@@ -31,8 +41,9 @@ public class EtatPersonnalController {
     */
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public @ResponseBody EtatPersonnel view(@PathVariable String id){
-        EtatPersonnel etatPersonnel = etatPersonnelRepository.findOne(id);
-        return etatPersonnel;
+        Optional<EtatPersonnel> etatPersonnel = etatPersonnelRepository.findById(id);
+
+        return etatPersonnel.orElse(null);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
