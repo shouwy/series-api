@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.tekCorp.api.domain.EtatPersonnel;
+import org.tekCorp.api.domain.dto.EtatPersonnelDto;
+import org.tekCorp.api.domain.model.EtatPersonnelModel;
 import org.tekCorp.api.repository.EtatPersonnelRepository;
+import org.tekCorp.api.service.EtatPersonalService;
+import org.tekCorp.api.service.impl.EtatPersonalServiceImpl;
 
 /**
  * Created by FRERES Thierry on 10/02/2016.
@@ -20,41 +23,41 @@ import org.tekCorp.api.repository.EtatPersonnelRepository;
 @RequestMapping("/etatPersonal")
 public class EtatPersonnalController {
 
-    private final EtatPersonnelRepository etatPersonnelRepository;
+    private final EtatPersonalService etatPersonalService;
 
     @Autowired
-    public EtatPersonnalController(EtatPersonnelRepository etatPersonnelRepository) {
-        this.etatPersonnelRepository = etatPersonnelRepository;
+    public EtatPersonnalController(EtatPersonalServiceImpl etatPersonalService) {
+        this.etatPersonalService = etatPersonalService;
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public @ResponseBody List<EtatPersonnel> list(){
-        return etatPersonnelRepository.findAll();
+    public @ResponseBody List<EtatPersonnelDto> list(){
+        return etatPersonalService.findAll();
     }
 
     /*
     @RequestMapping(value = "/list/type/", method = RequestMethod.GET)
-    public @ResponseBody List<EtatPersonnel> listByType(@RequestBody Type type){
-        List<EtatPersonnel> etatList = etatPersonnelRepository.findByType(type);
+    public @ResponseBody List<EtatPersonnelDto> listByType(@RequestBody TypeDto type){
+        List<EtatPersonnelDto> etatList = etatPersonnelRepository.findByType(type);
         return etatList;
     }
     */
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
-    public @ResponseBody EtatPersonnel view(@PathVariable String id){
-        Optional<EtatPersonnel> etatPersonnel = etatPersonnelRepository.findById(id);
-
-        return etatPersonnel.orElse(null);
+    public @ResponseBody
+    EtatPersonnelDto view(@PathVariable String id){
+        return etatPersonalService.find(id);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public @ResponseBody EtatPersonnel add(@RequestBody EtatPersonnel etatPersonnel){
-        EtatPersonnel oriEtatPersonnal = etatPersonnelRepository.findByEtatPersName(etatPersonnel.getEtatPersName());
+    public @ResponseBody
+    EtatPersonnelDto add(@RequestBody EtatPersonnelDto etatPersonnelModel){
+        EtatPersonnelDto oriEtatPersonnal = etatPersonalService.find(etatPersonnelModel);
         if (oriEtatPersonnal != null) {
             return oriEtatPersonnal;
         }
 
-        etatPersonnel = etatPersonnelRepository.save(etatPersonnel);
+        etatPersonnelModel = etatPersonalService.save(etatPersonnelModel);
 
-        return etatPersonnel;
+        return etatPersonnelModel;
     }
 }

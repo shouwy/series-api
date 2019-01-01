@@ -1,4 +1,4 @@
-package org.tekCorp.api.domain;
+package org.tekCorp.api.domain.model;
 
 import lombok.Data;
 
@@ -12,15 +12,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
  */
 @Document
 @Data
-public class Etat {
+public class EtatPersonnelModel {
     @Id
     private String id;
     @Indexed(unique = true)
-    private String etatName;
+    private String etatPersName;
 
     @Override
     public String toString(){
-        return "Nom : "+this.etatName;
+        return "Nom : "+this.etatPersName;
     }
-
 }

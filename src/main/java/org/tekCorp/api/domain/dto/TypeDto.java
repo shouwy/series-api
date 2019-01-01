@@ -1,24 +1,20 @@
-package org.tekCorp.api.domain;
-
-import java.util.List;
+package org.tekCorp.api.domain.dto;
 
 import lombok.Data;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
+
 /**
  * Created by FRERES Thierry on 05/02/2016.
  */
-@Document
 @Data
-public class Type {
+public class TypeDto {
 
-    @Id
     private String id;
-    private List<EtatPersonnel> etatList;
-    @Indexed(unique = true)
+    private List<EtatPersonnelDto> etatList;
     private String typeName;
 
     @Override
