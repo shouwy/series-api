@@ -1,24 +1,22 @@
 package org.tekCorp.api.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.tekCorp.api.domain.dto.EtatPersonnelDto;
 import org.tekCorp.api.domain.mapper.EtatPersonalMapper;
 import org.tekCorp.api.repository.EtatPersonnelRepository;
 import org.tekCorp.api.service.EtatPersonalService;
 
-import java.util.List;
-
+@Service
 public class EtatPersonalServiceImpl implements EtatPersonalService {
 
+    @Autowired
     private EtatPersonnelRepository etatPersonnelRepository;
-    private EtatPersonalMapper etatPersonalMapper;
-
 
     @Autowired
-    EtatPersonalServiceImpl(EtatPersonnelRepository etatPersonnelRepository, EtatPersonalMapper etatPersonalMapper) {
-        this.etatPersonnelRepository = etatPersonnelRepository;
-        this.etatPersonalMapper = etatPersonalMapper;
-    }
+    private EtatPersonalMapper etatPersonalMapper;
 
     @Override
     public List<EtatPersonnelDto> findAll() {

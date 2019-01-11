@@ -1,15 +1,15 @@
 package org.tekCorp.api.service;
 
-import org.tekCorp.api.domain.dto.EtatDto;
-
 import java.util.List;
 
-public abstract class EtatService {
-    public abstract List<EtatDto> findAll();
+import org.tekCorp.api.domain.dto.EtatDto;
 
-    public abstract EtatDto find(String id);
+public interface EtatService {
+    List<EtatDto> findAll();
 
-    public abstract EtatDto find(EtatDto etatDto);
+    EtatDto find(String id);
 
-    public abstract EtatDto save(EtatDto etatDto);
+    EtatDto find(EtatDto etatDto);
+
+    EtatDto save(EtatDto etatDto);
 }

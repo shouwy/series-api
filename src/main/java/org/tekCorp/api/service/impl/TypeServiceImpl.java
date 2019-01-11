@@ -1,28 +1,22 @@
 package org.tekCorp.api.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tekCorp.api.domain.dto.TypeDto;
 import org.tekCorp.api.domain.mapper.TypeMapper;
 import org.tekCorp.api.repository.TypeRepository;
-import org.tekCorp.api.service.EtatService;
 import org.tekCorp.api.service.TypeService;
 
-import java.util.List;
-
 @Service
-public class TypeServiceImpl extends TypeService {
-
-    private TypeRepository typeRepository;
-    private TypeMapper typeMapper;
-
-    private EtatService etatService;
+public class TypeServiceImpl implements TypeService {
 
     @Autowired
-    TypeServiceImpl(TypeRepository typeRepository, TypeMapper typeMapper) {
-        this.typeRepository = typeRepository;
-        this.typeMapper = typeMapper;
-    }
+    private TypeRepository typeRepository;
+
+    @Autowired
+    private TypeMapper typeMapper;
 
     @Override
     public List<TypeDto> findAll() {

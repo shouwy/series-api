@@ -1,16 +1,22 @@
 package org.tekCorp.api.domain.mapper;
 
-import org.mapstruct.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.mapstruct.AfterMapping;
+import org.mapstruct.Context;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.Mappings;
+import org.mapstruct.Named;
 import org.tekCorp.api.domain.dto.EtatPersonnelDto;
 import org.tekCorp.api.domain.dto.TypeDto;
 import org.tekCorp.api.domain.model.TypeModel;
 import org.tekCorp.api.service.EtatPersonalService;
 import org.tekCorp.api.service.impl.EtatServiceImpl;
 
-import java.util.ArrayList;
-import java.util.List;
-
-@Mapper(componentModel = "sptring", uses = {EtatServiceImpl.class})
+@Mapper(componentModel = "spring", uses = {EtatServiceImpl.class})
 public interface TypeMapper {
 
     List<TypeDto> modelToDto(List<TypeModel> all);

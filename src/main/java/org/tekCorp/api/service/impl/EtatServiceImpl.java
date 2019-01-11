@@ -1,5 +1,7 @@
 package org.tekCorp.api.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tekCorp.api.domain.dto.EtatDto;
@@ -7,20 +9,14 @@ import org.tekCorp.api.domain.mapper.EtatMapper;
 import org.tekCorp.api.repository.EtatRepository;
 import org.tekCorp.api.service.EtatService;
 
-import java.util.List;
-
 @Service
-public class EtatServiceImpl extends EtatService {
-
-    private EtatRepository etatRepository;
-
-    private final EtatMapper etatMapper;
+public class EtatServiceImpl implements EtatService {
 
     @Autowired
-    EtatServiceImpl(EtatRepository etatRepository, EtatMapper etatMapper) {
-        this.etatRepository = etatRepository;
-        this.etatMapper = etatMapper;
-    }
+    private EtatRepository etatRepository;
+
+    @Autowired
+    private EtatMapper etatMapper;
 
     @Override
     public List<EtatDto> findAll() {

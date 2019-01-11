@@ -19,7 +19,7 @@ import org.tekCorp.api.repository.ElementRepository;
  * Created by FRERES Thierry on 10/02/2016.
  */
 @Controller
-@RequestMapping("/elements")
+@RequestMapping("/element")
 public class ElementsController {
 
     private final ElementRepository elementRepository;
@@ -65,12 +65,12 @@ public class ElementsController {
 
     @RequestMapping(value = "/list/type/", method = RequestMethod.POST)
     public @ResponseBody List<ElementModel> listByType(@RequestBody TypeModel typeModel){
-        return elementRepository.findByType(typeModel);
+        return elementRepository.findByTypeModel(typeModel);
     }
 
     @RequestMapping(value = "/list/etat/", method = RequestMethod.POST)
     public @ResponseBody List<ElementModel> listByEtat(@RequestBody EtatModel etatModel){
-        return elementRepository.findByEtat(etatModel);
+        return elementRepository.findByEtatModel(etatModel);
     }
 
     /*

@@ -10,5 +10,5 @@ import org.tekCorp.api.domain.model.EtatPersonnelModel;
 @Repository
 public interface EtatPersonnelRepository extends MongoRepository<EtatPersonnelModel, String> {
     EtatPersonnelModel findByEtatPersName(String etatPers);
-    //List<EtatPersonnelDto> findByType(TypeDto type);
+    //List<EtatPersonnelDto> findByTypeModel(TypeDto type);
 }

@@ -1,7 +1,6 @@
 package org.tekCorp.api.control;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tekCorp.api.domain.dto.EtatPersonnelDto;
-import org.tekCorp.api.domain.model.EtatPersonnelModel;
-import org.tekCorp.api.repository.EtatPersonnelRepository;
 import org.tekCorp.api.service.EtatPersonalService;
 import org.tekCorp.api.service.impl.EtatPersonalServiceImpl;
 
@@ -38,7 +35,7 @@ public class EtatPersonnalController {
     /*
     @RequestMapping(value = "/list/type/", method = RequestMethod.GET)
     public @ResponseBody List<EtatPersonnelDto> listByType(@RequestBody TypeDto type){
-        List<EtatPersonnelDto> etatList = etatPersonnelRepository.findByType(type);
+        List<EtatPersonnelDto> etatList = etatPersonnelRepository.findByTypeModel(type);
         return etatList;
     }
     */
