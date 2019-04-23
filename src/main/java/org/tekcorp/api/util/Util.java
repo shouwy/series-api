@@ -1,8 +1,9 @@
-package org.tekcorp.api.Util;
+package org.tekcorp.api.util;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.tekcorp.api.domain.model.ElementModel;
 import org.tekcorp.api.domain.model.TypeModel;
@@ -18,7 +19,8 @@ public class Util {
     private Util() {
         throw new IllegalStateException("Utility class");
     }
-    public static HashMap<TypeModel, List<ElementModel>> mapElementByIdType(List<TypeModel> typeModelList, List<ElementModel> listSeries){
+
+    public static Map<TypeModel, List<ElementModel>> mapElementByIdType(List<TypeModel> typeModelList, List<ElementModel> listSeries) {
         HashMap<TypeModel, List<ElementModel>> mapElement = new HashMap<>();
         for (TypeModel typeModel : typeModelList){
             for (ElementModel elementModel : listSeries) {

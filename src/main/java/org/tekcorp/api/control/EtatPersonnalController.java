@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tekcorp.api.domain.dto.EtatPersonnelDto;
 import org.tekcorp.api.service.EtatPersonalService;
@@ -27,7 +28,7 @@ public class EtatPersonnalController {
         this.etatPersonalService = etatPersonalService;
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping(value = "/list")
     public @ResponseBody List<EtatPersonnelDto> list(){
         return etatPersonalService.findAll();
     }
@@ -39,13 +40,13 @@ public class EtatPersonnalController {
         return etatList;
     }
     */
-    @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/view/{id}")
     public @ResponseBody
     EtatPersonnelDto view(@PathVariable String id){
         return etatPersonalService.find(id);
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping(value = "/add")
     public @ResponseBody
     EtatPersonnelDto add(@RequestBody EtatPersonnelDto etatPersonnelModel){
         EtatPersonnelDto oriEtatPersonnal = etatPersonalService.find(etatPersonnelModel);

@@ -4,10 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tekcorp.api.domain.dto.EtatDto;
 import org.tekcorp.api.service.EtatService;
@@ -28,18 +29,18 @@ public class EtatController {
         this.etatService = etatService;
     }
 
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @GetMapping(value = "/list")
         public @ResponseBody List<EtatDto> list(){
         return etatService.findAll();
         }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/{id}")
     public @ResponseBody
     EtatDto view(@PathVariable String id){
         return etatService.find(id);
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @PostMapping(value = "/add")
     public @ResponseBody
     EtatDto add(@RequestBody EtatDto etatDto){
         EtatDto orietat = etatService.find(etatDto);

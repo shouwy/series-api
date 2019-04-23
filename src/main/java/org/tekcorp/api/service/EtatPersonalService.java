@@ -1,16 +1,16 @@
 package org.tekcorp.api.service;
 
-import org.tekcorp.api.domain.dto.EtatPersonnelDto;
-
 import java.util.List;
+
+import org.tekcorp.api.domain.dto.EtatPersonnelDto;
 
 public interface EtatPersonalService {
     List<EtatPersonnelDto> findAll();
 
     EtatPersonnelDto find(String id);
 
-    EtatPersonnelDto find(EtatPersonnelDto EtatPersonnelDto);
+    EtatPersonnelDto find(EtatPersonnelDto etatPersonnelDto);
 
-    EtatPersonnelDto save(EtatPersonnelDto EtatPersonnelDto);
+    EtatPersonnelDto save(EtatPersonnelDto etatPersonnelDto);
 
 }

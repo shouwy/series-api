@@ -5,9 +5,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.tekcorp.api.domain.dto.ElementDto;
+import org.tekcorp.api.domain.dto.EtatDto;
+import org.tekcorp.api.domain.dto.TypeDto;
 import org.tekcorp.api.domain.mapper.ElementMapper;
-import org.tekcorp.api.domain.model.EtatModel;
-import org.tekcorp.api.domain.model.TypeModel;
+import org.tekcorp.api.domain.mapper.EtatMapper;
+import org.tekcorp.api.domain.mapper.TypeMapper;
 import org.tekcorp.api.repository.ElementRepository;
 import org.tekcorp.api.service.ElementService;
 
@@ -19,6 +21,12 @@ public class ElementServiceImpl implements ElementService {
 
     @Autowired
     private ElementMapper elementMapper;
+
+    @Autowired
+    private TypeMapper typeMapper;
+
+    @Autowired
+    private EtatMapper etatMapper;
 
     @Override
     public List<ElementDto> findAll() {
@@ -36,13 +44,13 @@ public class ElementServiceImpl implements ElementService {
     }
 
     @Override
-    public List<ElementDto> findByTypeModel(TypeModel typeModel) {
-        return elementMapper.modelToDto(elementRepository.findByTypeModel(typeModel));
+    public List<ElementDto> findByTypeModel(TypeDto typeModel) {
+        return elementMapper.modelToDto(elementRepository.findByTypeModel(typeMapper.dtoToModel(typeModel)));
     }
 
     @Override
-    public List<ElementDto> findByEtatModel(EtatModel etatModel) {
-        return elementMapper.modelToDto(elementRepository.findByEtatModel(etatModel));
+    public List<ElementDto> findByEtatModel(EtatDto etatModel) {
+        return elementMapper.modelToDto(elementRepository.findByEtatModel(etatMapper.dtoToModel(etatModel)));
     }
 
     @Override

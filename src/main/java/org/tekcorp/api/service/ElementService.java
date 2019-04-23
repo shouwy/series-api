@@ -3,8 +3,8 @@ package org.tekcorp.api.service;
 import java.util.List;
 
 import org.tekcorp.api.domain.dto.ElementDto;
-import org.tekcorp.api.domain.model.EtatModel;
-import org.tekcorp.api.domain.model.TypeModel;
+import org.tekcorp.api.domain.dto.EtatDto;
+import org.tekcorp.api.domain.dto.TypeDto;
 
 public interface ElementService {
     List<ElementDto> findAll();
@@ -15,7 +15,7 @@ public interface ElementService {
 
     ElementDto findByTitleAndYear(ElementDto elementDto);
 
-    List<ElementDto> findByTypeModel(TypeModel typeModel);
+    List<ElementDto> findByTypeModel(TypeDto typeModel);
 
-    List<ElementDto> findByEtatModel(EtatModel etatModel);
+    List<ElementDto> findByEtatModel(EtatDto etatModel);
 }
