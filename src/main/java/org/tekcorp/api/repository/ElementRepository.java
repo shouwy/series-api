@@ -15,6 +15,6 @@ import org.tekcorp.api.domain.model.TypeModel;
 public interface ElementRepository extends MongoRepository<ElementModel, String> {
     List<ElementModel> findByTypeModel(TypeModel typeModel);
     ElementModel findByTitleAndYear(String title, Integer year);
-
     List<ElementModel> findByEtatModel(EtatModel etatModel);
+
 }

@@ -11,6 +11,13 @@ import org.tekcorp.api.domain.model.TypeModel;
  * Created by FRERES Thierry on 05/02/2016.
  */
 public class Util {
+
+    /**
+     * Constructor
+     */
+    private Util() {
+        throw new IllegalStateException("Utility class");
+    }
     public static HashMap<TypeModel, List<ElementModel>> mapElementByIdType(List<TypeModel> typeModelList, List<ElementModel> listSeries){
         HashMap<TypeModel, List<ElementModel>> mapElement = new HashMap<>();
         for (TypeModel typeModel : typeModelList){

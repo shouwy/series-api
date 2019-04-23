@@ -1,7 +1,6 @@
 package org.tekcorp.api.control;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,10 +9,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.tekcorp.api.domain.model.ElementModel;
+import org.tekcorp.api.domain.dto.ElementDto;
 import org.tekcorp.api.domain.model.EtatModel;
 import org.tekcorp.api.domain.model.TypeModel;
-import org.tekcorp.api.repository.ElementRepository;
+import org.tekcorp.api.service.ElementService;
 
 /**
  * Created by FRERES Thierry on 10/02/2016.
@@ -22,61 +21,52 @@ import org.tekcorp.api.repository.ElementRepository;
 @RequestMapping("/element")
 public class ElementsController {
 
-    private final ElementRepository elementRepository;
-
+    
+    private ElementService elementService;
+    
     @Autowired
-    public ElementsController(ElementRepository elementRepository) {
-        this.elementRepository = elementRepository;
+    public ElementsController(ElementService elementService) {
+        this.elementService = elementService;
     }
 
     @RequestMapping(value = "/view/{id}", method = RequestMethod.GET)
     public @ResponseBody
-    ElementModel view(@PathVariable String id){
-        Optional<ElementModel> element = elementRepository.findById(id);
-
-        return element.orElse(null);
+    ElementDto view(@PathVariable String id){
+        return elementService.find(id);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public @ResponseBody
-    ElementModel add(@RequestBody ElementModel elementModel){
-        ElementModel oriElementModel = elementRepository.findByTitleAndYear(elementModel.getTitle(), elementModel.getYear());
+    ElementDto add(@RequestBody ElementDto elementModel){
+        ElementDto oriElementDto = elementService.findByTitleAndYear(elementModel);
 
-        if (oriElementModel != null){
-            return oriElementModel;
+        if (oriElementDto != null){
+            return oriElementDto;
         }
 
-        elementModel = elementRepository.save(elementModel);
+        elementModel = elementService.save(elementModel);
         return elementModel;
     }
 
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public @ResponseBody
-    ElementModel edit(@PathVariable String id){
-        Optional<ElementModel> element = elementRepository.findById(id);
-
-        return element.orElse(null);
-    }
-
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public @ResponseBody List<ElementModel> list(){
-        return elementRepository.findAll();
+    public @ResponseBody List<ElementDto> list(){
+        return elementService.findAll();
     }
 
     @RequestMapping(value = "/list/type/", method = RequestMethod.POST)
-    public @ResponseBody List<ElementModel> listByType(@RequestBody TypeModel typeModel){
-        return elementRepository.findByTypeModel(typeModel);
+    public @ResponseBody List<ElementDto> listByType(@RequestBody TypeModel typeModel){
+        return elementService.findByTypeModel(typeModel);
     }
 
     @RequestMapping(value = "/list/etat/", method = RequestMethod.POST)
-    public @ResponseBody List<ElementModel> listByEtat(@RequestBody EtatModel etatModel){
-        return elementRepository.findByEtatModel(etatModel);
+    public @ResponseBody List<ElementDto> listByEtat(@RequestBody EtatModel etatModel){
+        return elementService.findByEtatModel(etatModel);
     }
 
     /*
     @RequestMapping(value = "/list/etatPersonnal/", method = RequestMethod.POST)
     public @ResponseBody List<ElementDto> listByEtatPersonnal(@RequestBody EtatPersonnelDto etatPersonnel){
-        List<ElementDto> elementList = elementRepository.findByEtatPersonal(etatPersonnel);
+        List<ElementDto> elementList = elementService.findByEtatPersonal(etatPersonnel);
         return elementList;
     }
     */
