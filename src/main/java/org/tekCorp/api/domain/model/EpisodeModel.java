@@ -1,4 +1,4 @@
-package org.tekCorp.api.domain;
+package org.tekCorp.api.domain.model;
 
 import java.util.Calendar;
 
@@ -8,10 +8,10 @@ import lombok.Data;
  * Created by FRERES Thierry on 05/02/2016.
  */
 @Data
-class Episode {
+class EpisodeModel {
 
     private String episodeTitle;
     private String synopsis;
     private Calendar dateSortie;
-    private EtatPersonnel etatPersonnel;
+    private EtatPersonnelModel etatPersonnelModel;
 }

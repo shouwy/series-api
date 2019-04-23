@@ -1,19 +1,20 @@
 package org.tekCorp.api.repository;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
-import org.tekCorp.api.domain.Element;
-import org.tekCorp.api.domain.Etat;
-import org.tekCorp.api.domain.Type;
-
-import java.util.List;
+import org.tekCorp.api.domain.model.ElementModel;
+import org.tekCorp.api.domain.model.EtatModel;
+import org.tekCorp.api.domain.model.TypeModel;
 
 /**
  * Created by FRERES Thierry on 05/02/2016.
  */
 @Repository
-public interface ElementRepository extends MongoRepository<Element, String> {
-    List<Element> findByType(Type type);
-    Element findByTitleAndYear(String title, Integer year);
-    List<Element> findByEtat(Etat etat);
+public interface ElementRepository extends MongoRepository<ElementModel, String> {
+    List<ElementModel> findByTypeModel(TypeModel typeModel);
+    ElementModel findByTitleAndYear(String title, Integer year);
+
+    List<ElementModel> findByEtatModel(EtatModel etatModel);
 }

@@ -1,17 +1,14 @@
 package org.tekCorp.api.control;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.tekCorp.api.domain.Type;
-import org.tekCorp.api.repository.TypeRepository;
+import org.springframework.web.bind.annotation.*;
+import org.tekCorp.api.domain.dto.TypeDto;
+import org.tekCorp.api.service.TypeService;
+import org.tekCorp.api.service.impl.TypeServiceImpl;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by FRERES Thierry on 10/02/2016.
@@ -20,33 +17,34 @@ import org.tekCorp.api.repository.TypeRepository;
 @RequestMapping("/type")
 public class TypeController {
 
-    private final TypeRepository typeRepository;
 
+    private TypeService typeService;
+    
     @Autowired
-    public TypeController(TypeRepository typeRepository) {
-        this.typeRepository = typeRepository;
+    public TypeController(TypeServiceImpl typeService) {
+        this.typeService = typeService;
     }
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public @ResponseBody List<Type> list(){
-        return typeRepository.findAll();
+    public @ResponseBody List<TypeDto> list(){
+        return typeService.findAll();
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public @ResponseBody Type view(@PathVariable String id){
-        Optional<Type> type = typeRepository.findById(id);
-
-        return type.orElse(null);
+    public @ResponseBody
+    TypeDto view(@PathVariable String id){
+        return typeService.find(id);
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public @ResponseBody Type add(@RequestBody Type type){
-        Type oriType = typeRepository.findByTypeName(type.getTypeName());
-        if (oriType != null) {
-            return oriType;
+    public @ResponseBody
+    TypeDto add(@RequestBody TypeDto typeDto){
+        TypeDto oriTypeDto = typeService.find(typeDto);
+        if (oriTypeDto != null) {
+            return oriTypeDto;
         }
-        type = typeRepository.save(type);
+        typeDto = typeService.save(typeDto);
 
-        return type;
+        return typeDto;
     }
 }

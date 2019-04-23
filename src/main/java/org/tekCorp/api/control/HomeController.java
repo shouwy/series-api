@@ -5,8 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.tekCorp.api.Util.Util;
-import org.tekCorp.api.domain.Element;
-import org.tekCorp.api.domain.Type;
+import org.tekCorp.api.domain.model.ElementModel;
+import org.tekCorp.api.domain.model.TypeModel;
 import org.tekCorp.api.repository.ElementRepository;
 import org.tekCorp.api.repository.TypeRepository;
 
@@ -24,26 +24,26 @@ public class HomeController {
     @Autowired ElementRepository elementRepository;
 
     @RequestMapping("/home")
-    public @ResponseBody List<Element> home(){
-        List<Type> typeList = typeRepository.findAll();
-        List<Element> elementList = elementRepository.findAll();
-        List<Element> typeElementHashMap = getRandElement(typeList, elementList);
-        return typeElementHashMap;
+    public @ResponseBody List<ElementModel> home(){
+        List<TypeModel> typeModelList = typeRepository.findAll();
+        List<ElementModel> elementModelList = elementRepository.findAll();
+        List<ElementModel> typeElementModelHashMap = getRandElement(typeModelList, elementModelList);
+        return typeElementModelHashMap;
     }
 
-    private List<Element> getRandElement(List<Type> typeList, List<Element> elementList) {
-        List<Element> typeElementHashMap = new ArrayList<Element>();
-        HashMap<Type, List<Element>> mapElementByIdType = Util.mapElementByIdType(typeList, elementList);
+    private List<ElementModel> getRandElement(List<TypeModel> typeModelList, List<ElementModel> elementModelList) {
+        List<ElementModel> typeElementModelHashMap = new ArrayList<ElementModel>();
+        HashMap<TypeModel, List<ElementModel>> mapElementByIdType = Util.mapElementByIdType(typeModelList, elementModelList);
 
-        for (Type type : typeList){
-            List<Element> elements = mapElementByIdType.get(type);
-            if (elements != null && !elements.isEmpty()){
-                Element element = elements.get((int) Math.random() * elements.size());
-                typeElementHashMap.add(element);
+        for (TypeModel typeModel : typeModelList){
+            List<ElementModel> elementModels = mapElementByIdType.get(typeModel);
+            if (elementModels != null && !elementModels.isEmpty()){
+                ElementModel elementModel = elementModels.get((int) Math.random() * elementModels.size());
+                typeElementModelHashMap.add(elementModel);
             }
         }
 
-        return typeElementHashMap;
+        return typeElementModelHashMap;
     }
 
 }
