@@ -62,6 +62,6 @@ crashlytics-build.properties
 hs_err_pid*
 
 /target/
-src/main/java/org/tekCorp/api/security/
+src/main/java/org/tekcorp/api/security/
 target/generated-sources/
 target/maven-status/
