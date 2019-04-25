@@ -8,7 +8,6 @@ import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-import org.mapstruct.Mappings;
 import org.mapstruct.Named;
 import org.tekcorp.api.domain.dto.EtatPersonnelDto;
 import org.tekcorp.api.domain.dto.TypeDto;
@@ -21,14 +20,10 @@ public interface TypeMapper {
 
     List<TypeDto> modelToDto(List<TypeModel> all);
 
-    @Mappings({
-            @Mapping(target = "etatList", ignore = true)
-    })
+    @Mapping(target = "etatList", ignore = true)
     TypeDto modelToDto(TypeModel typeModel);
 
-    @Mappings({
-            @Mapping(source = "etatList", target = "etatList", qualifiedByName = "etatPersNameToString")
-    })
+    @Mapping(source = "etatList", target = "etatList", qualifiedByName = "etatPersNameToString")
     TypeModel dtoToModel(TypeDto typeDto);
 
     @AfterMapping

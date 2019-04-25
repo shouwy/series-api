@@ -33,13 +33,6 @@ public class EtatPersonnalController {
         return etatPersonalService.findAll();
     }
 
-    /*
-    @RequestMapping(value = "/list/type/", method = RequestMethod.GET)
-    public @ResponseBody List<EtatPersonnelDto> listByType(@RequestBody TypeDto type){
-        List<EtatPersonnelDto> etatList = etatPersonnelRepository.findByTypeModel(type);
-        return etatList;
-    }
-    */
     @GetMapping(value = "/view/{id}")
     public @ResponseBody
     EtatPersonnelDto view(@PathVariable String id){

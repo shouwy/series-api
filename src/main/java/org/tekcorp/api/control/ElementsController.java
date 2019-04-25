@@ -65,12 +65,4 @@ public class ElementsController {
     List<ElementDto> listByEtat(@RequestBody EtatDto etatModel) {
         return elementService.findByEtatModel(etatModel);
     }
-
-    /*
-    @RequestMapping(value = "/list/etatPersonnal/", method = RequestMethod.POST)
-    public @ResponseBody List<ElementDto> listByEtatPersonnal(@RequestBody EtatPersonnelDto etatPersonnel){
-        List<ElementDto> elementList = elementService.findByEtatPersonal(etatPersonnel);
-        return elementList;
-    }
-    */
 }
