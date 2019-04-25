@@ -1,8 +1,8 @@
 package org.tekcorp.api.domain.dto;
 
-import lombok.Data;
-
 import java.util.List;
+
+import lombok.Data;
 
 /**
  * Created by FRERES Thierry on 05/02/2016.
@@ -13,9 +13,9 @@ public class ElementDto {
     private String title;
     private Integer year;
     private String synopsis;
-    private TypeDto typeDto;
-    private EtatDto etatDto;
-    private List<SaisonDto> saisonDtos;
+    private TypeDto type;
+    private EtatDto etat;
+    private List<SaisonDto> seasons;
     private String image;
 
     @Override

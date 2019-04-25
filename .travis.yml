@@ -10,4 +10,9 @@ jdk:
 
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - mvn sonar:sonar -Dsonar.projectKey=shouwy_series-api -Dsonar.organization=shouwy-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=06e65d9508f97de0db471c119908a2ef3adb21f2 -Dsonar.java.binaries=./target/classes
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.projectKey=shouwy_series-api -Dsonar.organization=shouwy-github -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=06e65d9508f97de0db471c119908a2ef3adb21f2 -Dsonar.java.binaries=./target/classes
+
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.sonar/cache'

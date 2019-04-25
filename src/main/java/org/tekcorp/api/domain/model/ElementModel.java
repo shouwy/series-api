@@ -23,9 +23,9 @@ public class ElementModel {
     private String title;
     private Integer year;
     private String synopsis;
-    private TypeModel typeModel;
-    private EtatModel etatModel;
-    private List<SaisonModel> saisonModels;
+    private TypeModel type;
+    private EtatModel etat;
+    private List<SaisonModel> seasons;
     private String image;
 
     @Override
