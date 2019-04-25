@@ -8,7 +8,7 @@ import lombok.Data;
  * Created by FRERES Thierry on 05/02/2016.
  */
 @Data
-class SaisonModel {
+public class SaisonModel {
 
     private String seasonName;
     private String anneeProduction;

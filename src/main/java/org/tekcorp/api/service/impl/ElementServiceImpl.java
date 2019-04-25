@@ -10,23 +10,28 @@ import org.tekcorp.api.domain.dto.TypeDto;
 import org.tekcorp.api.domain.mapper.ElementMapper;
 import org.tekcorp.api.domain.mapper.EtatMapper;
 import org.tekcorp.api.domain.mapper.TypeMapper;
+import org.tekcorp.api.domain.model.ElementModel;
 import org.tekcorp.api.repository.ElementRepository;
 import org.tekcorp.api.service.ElementService;
 
 @Service
 public class ElementServiceImpl implements ElementService {
 
-    @Autowired
-    private ElementRepository elementRepository;
+    private final ElementRepository elementRepository;
+
+    private final ElementMapper elementMapper;
+
+    private final TypeMapper typeMapper;
+
+    private final EtatMapper etatMapper;
 
     @Autowired
-    private ElementMapper elementMapper;
-
-    @Autowired
-    private TypeMapper typeMapper;
-
-    @Autowired
-    private EtatMapper etatMapper;
+    public ElementServiceImpl(ElementRepository elementRepository, ElementMapper elementMapper, TypeMapper typeMapper, EtatMapper etatMapper) {
+        this.elementRepository = elementRepository;
+        this.elementMapper = elementMapper;
+        this.typeMapper = typeMapper;
+        this.etatMapper = etatMapper;
+    }
 
     @Override
     public List<ElementDto> findAll() {
@@ -45,12 +50,14 @@ public class ElementServiceImpl implements ElementService {
 
     @Override
     public List<ElementDto> findByTypeModel(TypeDto typeModel) {
-        return elementMapper.modelToDto(elementRepository.findByTypeModel(typeMapper.dtoToModel(typeModel)));
+        List<ElementModel> models = elementRepository.findByTypeModel(typeMapper.dtoToModel(typeModel));
+        return elementMapper.modelToDto(models);
     }
 
     @Override
     public List<ElementDto> findByEtatModel(EtatDto etatModel) {
-        return elementMapper.modelToDto(elementRepository.findByEtatModel(etatMapper.dtoToModel(etatModel)));
+        List<ElementModel> models = elementRepository.findByEtatModel(etatMapper.dtoToModel(etatModel));
+        return elementMapper.modelToDto(models);
     }
 
     @Override
