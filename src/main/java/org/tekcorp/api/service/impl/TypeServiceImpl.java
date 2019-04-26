@@ -12,11 +12,14 @@ import org.tekcorp.api.service.TypeService;
 @Service
 public class TypeServiceImpl implements TypeService {
 
-    @Autowired
-    private TypeRepository typeRepository;
+    private final TypeRepository typeRepository;
+    private final TypeMapper typeMapper;
 
     @Autowired
-    private TypeMapper typeMapper;
+    public TypeServiceImpl(TypeRepository typeRepository, TypeMapper typeMapper) {
+        this.typeRepository = typeRepository;
+        this.typeMapper = typeMapper;
+    }
 
     @Override
     public List<TypeDto> findAll() {
