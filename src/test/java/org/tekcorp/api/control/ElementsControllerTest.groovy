@@ -1,5 +1,6 @@
 package org.tekcorp.api.control
 
+import org.apache.commons.lang3.StringUtils
 import org.junit.Before
 import org.junit.Test
 import org.tekcorp.api.domain.dto.ElementDto
@@ -77,14 +78,20 @@ class ElementsControllerTest extends Specification {
         modelKo.setType(typeBook)
 
         elementRepository.findById(_ as String) >> {
-            return Optional.of(modelOk)
+            String s ->
+                if (StringUtils.isEmpty(s))
+                    return null
+                if (s == idOk)
+                    return Optional.of(modelOk)
+                if (s == idKo)
+                    return Optional.of(modelKo)
+                return null
         }
 
         elementRepository.save(_ as ElementModel) >> {
-            ElementModel model = new ElementModel()
-            model.setId("123456789")
-
-            return model
+            ElementModel model ->
+                model.setId("123456789")
+                return model
         }
 
         elementRepository.findAll() >> {
@@ -109,6 +116,15 @@ class ElementsControllerTest extends Specification {
                 return new ArrayList<>()
         }
 
+        elementRepository.findByTitleAndYear(_ as String, _ as Integer) >> {
+            String s, Integer i ->
+                if (StringUtils.isEmpty(s) || i == null)
+                    return null
+                if (s == "Test" && i == 2019)
+                    return modelOk
+                return null
+        }
+
         elementDto = new ElementDto()
         elementDto.setTitle("Test")
         elementDto.setYear(2019)
@@ -123,25 +139,19 @@ class ElementsControllerTest extends Specification {
     }
 
     @Test
-    def "Add - WithoutExist"() {
+    def "Add - Without Exist"() {
         given:
-        elementRepository.findByTitleAndYear(_ as String, _ as Integer) >> {
-            return null
-        }
-
+        ElementDto model = new ElementDto()
+        model.setTitle("new")
+        model.setYear(2010)
         when:
-        ElementDto dto = controller.add(elementDto)
+        ElementDto dto = controller.add(model)
         then:
         dto.getId() == "123456789"
     }
 
     @Test
     def "Add - With Exist"() {
-        given:
-        elementRepository.findByTitleAndYear(_ as String, _ as Integer) >> {
-            return modelOk
-        }
-
         when:
         ElementDto dto = controller.add(elementDto)
         then:

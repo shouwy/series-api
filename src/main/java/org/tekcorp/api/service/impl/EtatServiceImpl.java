@@ -12,11 +12,15 @@ import org.tekcorp.api.service.EtatService;
 @Service
 public class EtatServiceImpl implements EtatService {
 
-    @Autowired
-    private EtatRepository etatRepository;
+    private final EtatRepository etatRepository;
+
+    private final EtatMapper etatMapper;
 
     @Autowired
-    private EtatMapper etatMapper;
+    public EtatServiceImpl(EtatRepository etatRepository, EtatMapper etatMapper) {
+        this.etatRepository = etatRepository;
+        this.etatMapper = etatMapper;
+    }
 
     @Override
     public List<EtatDto> findAll() {

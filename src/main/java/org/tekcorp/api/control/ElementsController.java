@@ -14,6 +14,7 @@ import org.tekcorp.api.domain.dto.ElementDto;
 import org.tekcorp.api.domain.dto.EtatDto;
 import org.tekcorp.api.domain.dto.TypeDto;
 import org.tekcorp.api.service.ElementService;
+import org.tekcorp.api.service.impl.ElementServiceImpl;
 
 /**
  * Created by FRERES Thierry on 10/02/2016.
@@ -21,12 +22,11 @@ import org.tekcorp.api.service.ElementService;
 @Controller
 @RequestMapping("/element")
 public class ElementsController {
-
     
     private ElementService elementService;
     
     @Autowired
-    public ElementsController(ElementService elementService) {
+    public ElementsController(ElementServiceImpl elementService) {
         this.elementService = elementService;
     }
 

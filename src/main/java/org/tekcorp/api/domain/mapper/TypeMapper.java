@@ -13,9 +13,9 @@ import org.tekcorp.api.domain.dto.EtatPersonnelDto;
 import org.tekcorp.api.domain.dto.TypeDto;
 import org.tekcorp.api.domain.model.TypeModel;
 import org.tekcorp.api.service.EtatPersonalService;
-import org.tekcorp.api.service.impl.EtatServiceImpl;
+import org.tekcorp.api.service.impl.EtatPersonalServiceImpl;
 
-@Mapper(componentModel = "spring", uses = {EtatServiceImpl.class})
+@Mapper(componentModel = "spring", uses = {EtatPersonalServiceImpl.class})
 public interface TypeMapper {
 
     List<TypeDto> modelToDto(List<TypeModel> all);
