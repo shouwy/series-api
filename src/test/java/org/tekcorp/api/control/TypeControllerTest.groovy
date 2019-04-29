@@ -5,13 +5,12 @@ import org.junit.Before
 import org.junit.Test
 import org.tekcorp.api.domain.dto.EtatPersonnelDto
 import org.tekcorp.api.domain.dto.TypeDto
-import org.tekcorp.api.domain.mapper.EtatMapper
+import org.tekcorp.api.domain.mapper.EtatPersonalMapper
+import org.tekcorp.api.domain.mapper.EtatPersonalMapperImpl
 import org.tekcorp.api.domain.mapper.TypeMapper
 import org.tekcorp.api.domain.mapper.TypeMapperImpl
 import org.tekcorp.api.domain.model.TypeModel
-import org.tekcorp.api.repository.EtatRepository
 import org.tekcorp.api.repository.TypeRepository
-import org.tekcorp.api.service.EtatService
 import org.tekcorp.api.service.TypeService
 import org.tekcorp.api.service.impl.TypeServiceImpl
 import spock.lang.Specification
@@ -22,9 +21,7 @@ class TypeControllerTest extends Specification {
     TypeService typeService
     TypeRepository typeRepository
     TypeMapper typeMapper
-    EtatService etatService
-    EtatRepository etatRepository
-    EtatMapper etatMapper
+    EtatPersonalMapper etatMapper
 
     String idOk
     String idKo
@@ -33,6 +30,7 @@ class TypeControllerTest extends Specification {
 
     @Before
     init() {
+        etatMapper = new EtatPersonalMapperImpl()
         typeRepository = Mock(TypeRepository.class)
         typeMapper = new TypeMapperImpl()
         typeService = new TypeServiceImpl(typeRepository, typeMapper)
@@ -70,6 +68,10 @@ class TypeControllerTest extends Specification {
             String s ->
                 if (StringUtils.isEmpty(s))
                     return null
+                if (s == "Book")
+                    return typeBook
+                if (s == "Movie")
+                    return typeMovie
                 return null
         }
 
