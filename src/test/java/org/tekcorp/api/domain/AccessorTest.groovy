@@ -15,7 +15,7 @@ import java.util.regex.Pattern
 class AccessorTest {
 
     /** Suffixe DTO. */
-    private static final String SUFFIXE_MODEL = "Model"
+    private static final List<String> SUFFIXE_ACC = Arrays.asList("Model", "Dto")
 
     /** Préfixe get des accessors. */
     private static final String PREFIXE_GET = "get"
@@ -50,17 +50,14 @@ class AccessorTest {
                     methodeName = methode.getName()
 
                     if (methodeName.startsWith("toString") && paramTypes.length == 0) {
-                        log.debug("Test de la méthode {}.{}", classz.getSimpleName(), methodeName)
                         methode.invoke(obj)
                     }
 
                     if (methodeName.startsWith("hashCode") && paramTypes.length == 0) {
-                        log.debug("Test de la méthode {}.{}", classz.getSimpleName(), methodeName)
                         methode.invoke(obj)
                     }
 
                     if (methodeName.startsWith("equals") && paramTypes.length == 1) {
-                        log.debug("Test de la méthode {}.{}", classz.getSimpleName(), methodeName)
                         methode.invoke(obj, obj)
 
                         Object otherObj = classz.newInstance()
@@ -70,13 +67,9 @@ class AccessorTest {
                     if ((methodeName.startsWith(PREFIXE_GET) || methodeName.startsWith(PREFIXE_IS))
                             && paramTypes.length == 0) {
                         // getter
-                        log.debug("Test de la méthode {}.{}", classz.getSimpleName(), methodeName)
                         methode.invoke(obj)
                     }
                     if (methodeName.startsWith(PREFIXE_SET) && paramTypes.length == 1) {
-                        // setter
-                        log.debug("Test de la méthode {}.{}", classz.getSimpleName(), methodeName)
-
                         // verification sur le type de paramètre
                         Class<?> paramType = paramTypes[0]
 
@@ -130,14 +123,18 @@ class AccessorTest {
 
     void computePojo(Set<BeanDefinition> classes) {
         Object pojo
-        for (BeanDefinition bean : classes) {
+        classes.each { BeanDefinition bean ->
             if (BLACKLIST.contains(bean.getBeanClassName())) {
                 log.warn("TODO nettoyage enum {}", bean.getBeanClassName())
-
-            } else if (bean.getBeanClassName().endsWith(SUFFIXE_MODEL)) {
-                log.debug(bean.getBeanClassName())
-                pojo = Class.forName(bean.getBeanClassName()).newInstance()
-                Assert.assertTrue("checkAccessor failed for " + bean.getBeanClassName(), this.checkAccessor(pojo))
+            } else {
+                SUFFIXE_ACC.each {
+                    String suffix ->
+                        if (bean.getBeanClassName().endsWith(suffix)) {
+                            log.debug(bean.getBeanClassName())
+                            pojo = Class.forName(bean.getBeanClassName()).newInstance()
+                            Assert.assertTrue("checkAccessor failed for " + bean.getBeanClassName(), this.checkAccessor(pojo))
+                        }
+                }
             }
         }
     }

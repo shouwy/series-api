@@ -1,14 +1,14 @@
 package org.tekcorp.api.domain.dto;
 
-import lombok.Data;
-
 import java.util.Calendar;
+
+import lombok.Data;
 
 /**
  * Created by FRERES Thierry on 05/02/2016.
  */
 @Data
-class EpisodeDto {
+public class EpisodeDto {
 
     private String episodeTitle;
     private String synopsis;
